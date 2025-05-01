@@ -18,6 +18,7 @@ This project is a Mobile Automation Testing Framework built for the official Lin
 
 🔁 Scroll Support: Scroll up/down using W3C Actions API for gesture simulation.
 
+
 🧰 Tech Stack & Tools
 Appium: For automating Android application testing.
 
@@ -33,6 +34,7 @@ Allure Reports: Advanced test reporting with annotations and screenshots.
 
 Jenkins: CI/CD pipeline integration for automated test execution.
 
+
 📷 Reporting & Debugging Enhancements
 📸 Screenshot Capture: Captures screenshots at every test step for better traceability.
 
@@ -42,6 +44,7 @@ Jenkins: CI/CD pipeline integration for automated test execution.
 
 🪵 Logging: Step-level logs using Log4j2 to assist with real-time debugging and test transparency.
 
+
 🔄 CI/CD Integration
 This framework is fully integrated with Jenkins, enabling:
 
@@ -50,6 +53,7 @@ Automated test execution on every build.
 Report generation after each run.
 
 Log monitoring and feedback on test results.
+
 
 📁 Project Structure Overview
 pages/ – Page Object Model classes for LinkedIn app screens.
@@ -61,6 +65,7 @@ utils/ – Utility classes for actions like scrolling, screenshot capture, wait 
 reports/ – Output directory for Extent and Allure reports.
 
 logs/ – Centralized log files using Log4j2.
+
 
 🧪 Test Execution Strategy
 Designed using the Page Object Model (POM) for maintainability.
