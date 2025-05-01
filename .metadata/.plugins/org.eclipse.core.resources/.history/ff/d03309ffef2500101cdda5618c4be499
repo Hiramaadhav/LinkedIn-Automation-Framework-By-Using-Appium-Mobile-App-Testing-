@@ -1,0 +1,18 @@
+package Pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class e_Send_Connection_Request_and_Like_a_post {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+	public e_Send_Connection_Request_and_Like_a_post(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20));	
+	}
+}

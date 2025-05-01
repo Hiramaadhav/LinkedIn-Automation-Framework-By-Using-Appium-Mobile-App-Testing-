@@ -1,0 +1,77 @@
+package Test_Runner;
+
+import org.apache.logging.log4j.Logger;
+import org.testng.annotations.Test;
+
+import Base.Base_Class;
+import Pages.a_Login_Page;
+import Pages.b_Search_Job;
+import Pages.c_Save_Job;
+import Pages.d_Search_User;
+import Pages.e_Send_Connection_Request_and_Like_a_post;
+import Pages.f_Logout;
+import Utils.Logs;
+
+public class Linkedin_Test_Run extends Base_Class{
+
+	private static final Logger log = Logs.getLogger(Linkedin_Test_Run.class);
+
+	@Test(priority=1)
+	public void LoginPage() throws InterruptedException {
+		a_Login_Page loginpage=new a_Login_Page(driver);
+		log.info("Login Page Initialized");
+		loginpage.ContinueWithGoogle();
+		log.info("Clicked On Continue With Google");
+		loginpage.ContinueAsLytics();
+		log.info("");
+		loginpage.manualPause();
+		log.info("Login Page Initialized");
+		loginpage.AfterCancel();
+		log.info("Login Page Initialized");
+
+	}
+
+	@Test(priority=2,dependsOnMethods = "LoginPage")
+	public void SearchJob() throws InterruptedException {
+		b_Search_Job searchjob=new b_Search_Job(driver);
+		searchjob.ClickOnJobs();
+		searchjob.ClickOnSearchIcon();
+		Thread.sleep(3000);
+		searchjob.SearchJob("Automation Tester");
+		searchjob.ClickOnSeeAllResults();
+	}
+
+	@Test(priority=3,dependsOnMethods = "SearchJob")
+	public void SaveJob() {
+		c_Save_Job savejob=new c_Save_Job(driver);
+		savejob.SelectJob();
+		savejob.SaveJob();
+		savejob.ScrollDown();
+	}
+
+	@Test(priority=4,dependsOnMethods="SaveJob")
+	public void SearchUser() {
+		d_Search_User searchuser=new d_Search_User(driver);
+		searchuser.RevertBackToJobPage();
+		searchuser.ClickOnHomeButton();
+		searchuser.SearchUser("Maadhav Hira");
+		searchuser.ClickOnSeeAllResults();
+	}
+
+	@Test(priority=5,dependsOnMethods="SearchUser")
+	public void SendConnectionRequestAndLikePost() {
+		e_Send_Connection_Request_and_Like_a_post sendconnectionrequestandlikepost=new e_Send_Connection_Request_and_Like_a_post(driver);
+		sendconnectionrequestandlikepost.SendConnectionRequest();
+		sendconnectionrequestandlikepost.ClickOnViewProfile();
+		sendconnectionrequestandlikepost.ScrollUp();
+		sendconnectionrequestandlikepost.LikeThePost();
+	}
+
+	@Test(priority=6,dependsOnMethods="SendConnectionRequestAndLikePost")
+	public void LogOut() {
+		f_Logout logout=new f_Logout(driver);
+		logout.ClickOnProfile();
+		logout.ClickOnSettings();
+		logout.SignOut();
+	}
+}

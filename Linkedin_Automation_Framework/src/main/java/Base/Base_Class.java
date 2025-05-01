@@ -1,0 +1,37 @@
+package Base;
+
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
+import Utils.Driver_Manager;
+import Utils.Extent_Report;
+import Utils.Logs;
+
+public class Base_Class {
+
+	public static WebDriver driver;
+	private static Logger log = Logs.getLogger(Base_Class.class);
+	public static ExtentReports extent;
+	public static ExtentTest test;
+
+	@BeforeSuite
+	public void setup() {
+		log.info("Test Suite Started");
+		extent=Extent_Report.initReport();  
+		log.info("Extent Report Initialized");
+		Driver_Manager.startdriver();
+		driver = Driver_Manager.driver;
+	}
+
+	@AfterSuite
+	public void teardown() {
+		Driver_Manager.enddriver();
+		log.info("Test Suite Finished");
+		Extent_Report.flushReport(); 
+		log.info("Extent Report Flushed");
+	}
+}

@@ -1,0 +1,58 @@
+package Test_Runner;
+
+import org.testng.annotations.Test;
+
+import Base.Base_Class;
+import Pages.a_Login_Page;
+import Pages.b_Search_Job;
+import Pages.c_Save_Job;
+import Pages.d_Search_User;
+import Pages.e_Send_Connection_Request_and_Like_a_post;
+
+public class Linkedin_Test_Run extends Base_Class{
+
+	@Test(priority=1)
+	public void LoginPage() {
+		a_Login_Page loginpage=new a_Login_Page(driver);
+		loginpage.ContinueWithGoogle();
+		loginpage.ContinueAsMaadhav();
+		loginpage.manualPause();
+		loginpage.AfterCancel();
+	}
+
+	@Test(priority=2,dependsOnMethods = "LoginPage")
+	public void SearchJob() throws InterruptedException {
+		b_Search_Job searchjob=new b_Search_Job(driver);
+		searchjob.ClickOnJobs();
+		searchjob.ClickOnSearchIcon();
+		Thread.sleep(3000);
+		searchjob.SearchJob("Automation Tester");
+		searchjob.ClickOnSeeAllResults();
+	}
+
+	@Test(priority=3,dependsOnMethods = "SearchJob")
+	public void SaveJob() {
+		c_Save_Job savejob=new c_Save_Job(driver);
+		savejob.SelectJob();
+		savejob.SaveJob();
+		savejob.ScrollDown();
+	}
+
+	@Test(priority=4,dependsOnMethods="SaveJob")
+	public void SearchUser() {
+		d_Search_User searchuser=new d_Search_User(driver);
+		searchuser.RevertBackToJobPage();
+		searchuser.ClickOnHomeButton();
+		searchuser.SearchUser("Maadhav Hira");
+		searchuser.ClickOnSeeAllResults();
+	}
+
+	@Test(priority=5,dependsOnMethods="SearchUser")
+	public void SendConnectionRequestAndLikePost() {
+		e_Send_Connection_Request_and_Like_a_post sendconnectionrequestandlikepost=new e_Send_Connection_Request_and_Like_a_post(driver);
+		sendconnectionrequestandlikepost.SendConnectionRequest();
+		sendconnectionrequestandlikepost.ClickOnViewProfile();
+		sendconnectionrequestandlikepost.scrollUpUntilLikePostVisible();
+		sendconnectionrequestandlikepost.LikeThePost();
+	}
+}

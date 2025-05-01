@@ -1,0 +1,47 @@
+package Pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class b_Search_Job {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+	public b_Search_Job(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20));	
+	}
+
+	@FindBy(xpath="(//android.widget.FrameLayout[@resource-id=\"com.linkedin.android:id/slim_notification_coach_mark\"])[5]")
+	private WebElement jobs;
+
+
+	@FindBy(xpath="(//android.widget.ImageView[@resource-id=\"com.linkedin.android:id/search_icon\"])[2]")
+	private WebElement searchicon;
+
+	@FindBy(xpath="//android.widget.EditText[@resource-id=\"com.linkedin.android:id/job_search_home_edit_text\" and @text=\"Search by title, skill, or company\"]")
+	private WebElement searchjob;
+
+
+	public void ClickOnJobs() {
+		wait.until(ExpectedConditions.elementToBeClickable(jobs)).click();
+	}
+
+	public void ClickOnSearchIcon() {
+		wait.until(ExpectedConditions.elementToBeClickable(searchicon)).click();
+	}
+
+	public void SearchJob(String Jobname) throws InterruptedException{
+		WebElement sj=wait.until(ExpectedConditions.elementToBeClickable(searchjob));
+		wait.until(ExpectedConditions.visibilityOf(sj));
+		sj.sendKeys(Jobname);
+		sj.submit();
+	}
+}

@@ -1,0 +1,55 @@
+package Pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class a_Login_Page {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+
+	public a_Login_Page(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20)); 
+	}
+
+	@FindBy(xpath="//android.widget.ImageView[@content-desc=\"Cancel\"]")
+	private WebElement beforecancel;
+
+	@FindBy(xpath="//android.widget.Button[@resource-id=\"com.linkedin.android:id/growth_prereg_fragment_join_with_google_button\"]")
+	private WebElement continuewithgoogle;
+
+	@FindBy(xpath="//android.widget.TextView[@resource-id=\"com.google.android.gms:id/account_display_name\" and @text=\"job lytics\"]")
+	private WebElement continueasmaadhavhira;
+
+	@FindBy(xpath="//android.widget.ImageButton[@content-desc=\"Close\"]")
+	private WebElement aftercancel;
+
+
+	public void ContinueWithGoogle() {
+		wait.until(ExpectedConditions.elementToBeClickable(beforecancel)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(continuewithgoogle)).click();
+	}
+
+	public void ContinueAsMaadhav() {
+		wait.until(ExpectedConditions.elementToBeClickable(continueasmaadhavhira)).click();
+	}
+	
+	public void manualPause() throws InterruptedException {
+		System.out.println("Captcha occurs---> Fill The Captcha --->Press ENTER to continue...");
+		/*Scanner sc = new Scanner(System.in);
+		sc.nextLine(); */
+		Thread.sleep(10000);
+	}
+	
+	public void AfterCancel() {
+		wait.until(ExpectedConditions.elementToBeClickable(aftercancel)).click();
+	}
+}

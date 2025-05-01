@@ -1,0 +1,103 @@
+package Test_Runner;
+
+import org.apache.logging.log4j.Logger;
+import org.testng.annotations.Test;
+
+import Base.Base_Class;
+import Pages.a_Login_Page;
+import Pages.b_Search_Job;
+import Pages.c_Save_Job;
+import Pages.d_Search_User;
+import Pages.e_Send_Connection_Request_and_Like_a_post;
+import Pages.f_Logout;
+import Utils.Logs;
+
+public class Linkedin_Test_Run extends Base_Class{
+
+	private static final Logger log = Logs.getLogger(Linkedin_Test_Run.class);
+	
+	extent=Extent_Report.initReport();
+
+	@Test(priority=1)
+	public void LoginPage() throws InterruptedException {
+		a_Login_Page loginpage=new a_Login_Page(driver);
+		log.info("Login Page Initialized");
+		loginpage.ContinueWithGoogle();
+		log.info("Clicked On Continue With Google");
+		loginpage.ContinueAsLytics();
+		log.info("Clicked On Continue As Lytics");
+		loginpage.manualPause();
+		log.info("Manual Pause Initialized--> Press Enter To Continue");
+		loginpage.AfterCancel();
+		log.info("Login Page Passed");
+	}
+
+	@Test(priority=2,dependsOnMethods = "LoginPage")
+	public void SearchJob() throws InterruptedException {
+		b_Search_Job searchjob=new b_Search_Job(driver);
+		log.info("Search Job Page Initialized");
+		searchjob.ClickOnJobs();
+		log.info("Clicked On Jobs Icon");
+		searchjob.ClickOnSearchIcon();
+		log.info("Clicked on Search Icon");
+		Thread.sleep(3000);
+		searchjob.SearchJob("Automation Tester");
+		log.info("Job Searched");
+		searchjob.ClickOnSeeAllResults();
+		log.info("Search Job Page Passed");
+	}
+
+	@Test(priority=3,dependsOnMethods = "SearchJob")
+	public void SaveJob() {
+		c_Save_Job savejob=new c_Save_Job(driver);
+		log.info("Save Job Page Initilized");
+		savejob.SelectJob();
+		log.info("Job is Selected");
+		savejob.SaveJob();
+		log.info("Job is Saved");
+		savejob.ScrollDown();
+		log.info("Scroll Down To end the current job page");
+		log.info("Save Job Page Passed");
+	}
+
+	@Test(priority=4,dependsOnMethods="SaveJob")
+	public void SearchUser() {
+		d_Search_User searchuser=new d_Search_User(driver);
+		log.info("Search User Page Initialized");
+		searchuser.RevertBackToJobPage();
+		log.info("Revert Back To Home Page");
+		searchuser.ClickOnHomeButton();
+		log.info("Clicked On Home Button");
+		searchuser.SearchUser("Maadhav Hira");
+		log.info("User is Searched");
+		searchuser.ClickOnSeeAllResults();
+		log.info("Search User Page Passed");
+	}
+
+	@Test(priority=5,dependsOnMethods="SearchUser")
+	public void SendConnectionRequestAndLikePost() {
+		e_Send_Connection_Request_and_Like_a_post sendconnectionrequestandlikepost=new e_Send_Connection_Request_and_Like_a_post(driver);
+		log.info("Send Connection Request And Like A Post page is Initialized");
+		sendconnectionrequestandlikepost.SendConnectionRequest();
+		log.info("Connection Request Sended");
+		sendconnectionrequestandlikepost.ClickOnViewProfile();
+		log.info("Clicked On View Profile");
+		sendconnectionrequestandlikepost.ScrollUp();
+		log.info("Scrolled till the like button is visible");
+		sendconnectionrequestandlikepost.LikeThePost();
+		log.info("Liked The Post");
+		log.info("Send Connection Request And Like A Post page Passed");
+	}
+
+	@Test(priority=6,dependsOnMethods="SendConnectionRequestAndLikePost")
+	public void LogOut() {
+		f_Logout logout=new f_Logout(driver);
+		log.info("Logout Page is Initialized");
+		logout.ClickOnProfile();
+		log.info("Clicked On Profile");
+		logout.ClickOnSettings();
+		log.info("Clicked On Settings");
+		logout.SignOut();
+		log.info("Clicked On SignOut");
+	}
+}

@@ -1,0 +1,35 @@
+[INFO ] 2025-05-01 16:24:53.352 [main] Base_Class - Test Suite Started
+[INFO ] 2025-05-01 16:24:53.522 [main] Base_Class - Extent Report Initialized
+[INFO ] 2025-05-01 16:25:01.360 [main] Base_Class - Login Page Initialized
+[INFO ] 2025-05-01 16:25:08.816 [main] Base_Class - Clicked On Continue With Google
+[INFO ] 2025-05-01 16:25:11.772 [main] Base_Class - Clicked On Continue As Lytics
+[INFO ] 2025-05-01 16:25:21.776 [main] Base_Class - Manual Pause Initialized--> Press Enter To Continue
+[INFO ] 2025-05-01 16:25:23.834 [main] Base_Class - Login Page Passed
+[INFO ] 2025-05-01 16:25:23.990 [main] Base_Class - Search Job Page Initialized
+[INFO ] 2025-05-01 16:25:28.458 [main] Base_Class - Clicked On Jobs Icon
+[INFO ] 2025-05-01 16:25:34.679 [main] Base_Class - Clicked on Search Icon
+[INFO ] 2025-05-01 16:25:44.674 [main] Base_Class - Job Searched
+[INFO ] 2025-05-01 16:25:48.763 [main] Base_Class - Search Job Page Passed
+[INFO ] 2025-05-01 16:25:48.786 [main] Base_Class - Save Job Page Initilized
+[INFO ] 2025-05-01 16:25:54.723 [main] Base_Class - Job is Selected
+[INFO ] 2025-05-01 16:26:00.622 [main] Base_Class - Job is Saved
+[INFO ] 2025-05-01 16:26:04.311 [main] Base_Class - Scroll Down To end the current job page
+[INFO ] 2025-05-01 16:26:04.312 [main] Base_Class - Save Job Page Passed
+[INFO ] 2025-05-01 16:26:04.333 [main] Base_Class - Search User Page Initialized
+[INFO ] 2025-05-01 16:26:13.720 [main] Base_Class - Revert Back To Home Page
+[INFO ] 2025-05-01 16:26:20.819 [main] Base_Class - Clicked On Home Button
+[INFO ] 2025-05-01 16:26:29.580 [main] Base_Class - User is Searched
+[INFO ] 2025-05-01 16:26:34.540 [main] Base_Class - Search User Page Passed
+[INFO ] 2025-05-01 16:26:34.562 [main] Base_Class - Send Connection Request And Like A Post page is Initialized
+[INFO ] 2025-05-01 16:26:40.703 [main] Base_Class - Connection Request Sended
+[INFO ] 2025-05-01 16:26:47.688 [main] Base_Class - Clicked On View Profile
+[INFO ] 2025-05-01 16:27:11.606 [main] Base_Class - Scrolled till the like button is visible
+[INFO ] 2025-05-01 16:27:16.769 [main] Base_Class - Liked The Post
+[INFO ] 2025-05-01 16:27:16.770 [main] Base_Class - Send Connection Request And Like A Post page Passed
+[INFO ] 2025-05-01 16:27:16.790 [main] Base_Class - Logout Page is Initialized
+[INFO ] 2025-05-01 16:27:33.544 [main] Base_Class - Clicked On Profile
+[INFO ] 2025-05-01 16:27:44.278 [main] Base_Class - Clicked On Settings
+[INFO ] 2025-05-01 16:27:56.930 [main] Base_Class - Clicked On SignOut
+[INFO ] 2025-05-01 16:27:56.931 [main] Base_Class - Allure Reports Generated
+[INFO ] 2025-05-01 16:27:57.541 [main] Base_Class - Test Suite Finished
+[INFO ] 2025-05-01 16:27:58.326 [main] Base_Class - Extent Report Flushed

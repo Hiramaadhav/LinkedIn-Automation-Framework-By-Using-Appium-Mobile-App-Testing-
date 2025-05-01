@@ -1,0 +1,18 @@
+package Pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class c_Save_Job {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+	public c_Save_Job(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20));	
+	}
+}

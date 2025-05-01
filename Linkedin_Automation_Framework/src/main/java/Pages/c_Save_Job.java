@@ -1,0 +1,69 @@
+package Pages;
+
+import java.time.Duration;
+import java.util.Collections;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class c_Save_Job {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+	public c_Save_Job(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20));	
+	}
+
+	@FindBy(xpath="(//android.widget.FrameLayout[@resource-id=\"com.linkedin.android:id/careers_job_item_swipe_container\"])[1]")
+	private WebElement selectjob;
+
+	@FindBy(xpath="//android.widget.Button[@resource-id=\"com.linkedin.android:id/entities_top_card_secondary_button\"]")
+	private WebElement savejob;
+
+	@FindBy(xpath="//android.widget.ImageView[@content-desc=\"Bottom Sheet Control Bar, Double Tap to Dismiss\"]")
+	private WebElement scrolldown;
+
+	public void SelectJob() {
+		wait.until(ExpectedConditions.elementToBeClickable(selectjob)).click();
+	}
+
+	public void SaveJob() {
+		wait.until(ExpectedConditions.elementToBeClickable(savejob)).click();
+	}
+
+	public void ScrollDown() {
+
+		wait.until(ExpectedConditions.visibilityOf(scrolldown));  
+
+		Point location = scrolldown.getLocation();
+		Dimension size = scrolldown.getSize();
+
+		int startX = location.getX() + size.getWidth() / 2;
+		int startY = location.getY() + size.getHeight() / 2;
+
+		int endX = startX;
+		int endY = startY + 1000;
+
+		PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+		Sequence swipe = new Sequence(finger, 1)
+				.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
+				.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+				.addAction(new Pause(finger, Duration.ofMillis(200)))
+				.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), endX, endY))
+				.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+		((RemoteWebDriver) ldriver).perform(Collections.singletonList(swipe));
+	}
+}

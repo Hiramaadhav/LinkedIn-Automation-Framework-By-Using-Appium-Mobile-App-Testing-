@@ -1,0 +1,75 @@
+package Pages;
+
+import java.time.Duration;
+import java.util.Collections;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class e_Send_Connection_Request_and_Like_a_post {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+	public e_Send_Connection_Request_and_Like_a_post(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20));	
+	}
+
+	@FindBy(xpath="//android.widget.Button[@content-desc=\"Connect\"]")
+	private WebElement clickonconnect;
+
+	@FindBy(xpath="//android.widget.Button[@resource-id=\"com.linkedin.android:id/entity_secondary_action\"]")
+	private WebElement clickonviewprofile;
+
+	@FindBy(xpath="//android.view.ViewGroup[@resource-id=\"com.linkedin.android:id/profile_header_component\"]")
+	private WebElement scrollup;
+
+	@FindBy(xpath="//android.widget.ImageView[@resource-id=\"com.linkedin.android:id/feed_social_actions_like_button\"]")
+	private WebElement likethepost;
+	
+
+	public void SendConnectionRequest() {
+		wait.until(ExpectedConditions.elementToBeClickable(clickonconnect)).click();
+	}
+
+	public void ClickOnViewProfile() {
+		wait.until(ExpectedConditions.elementToBeClickable(clickonviewprofile)).click();
+	}
+
+	public void ScrollUp() {
+		wait.until(ExpectedConditions.elementToBeClickable(scrollup));
+		Point location = scrollup.getLocation();
+		Dimension size = scrollup.getSize();
+
+		int startX = location.getX() + size.getWidth() / 2;
+		int startY = location.getY() + size.getHeight() / 2;
+
+		int endX = startX;
+		int endY = startY - 1750;
+
+		PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+		Sequence swipe = new Sequence(finger, 1)
+				.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
+				.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+				.addAction(new Pause(finger, Duration.ofMillis(200)))
+				.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), endX, endY))
+				.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+		((RemoteWebDriver) ldriver).perform(Collections.singletonList(swipe));
+	}
+
+	public void LikeThePost() {
+		wait.until(ExpectedConditions.elementToBeClickable(likethepost)).click();
+	}
+}

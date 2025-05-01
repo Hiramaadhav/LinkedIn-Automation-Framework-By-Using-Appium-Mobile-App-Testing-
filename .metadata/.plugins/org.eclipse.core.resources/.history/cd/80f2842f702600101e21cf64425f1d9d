@@ -1,0 +1,26 @@
+package Base;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
+
+import Utils.Driver_Manager;
+import Utils.Extent_Report;
+
+public class Base_Class {
+
+	public static WebDriver driver;
+	@BeforeSuite
+	public void setup() {
+		Driver_Manager.startdriver();
+		driver = Driver_Manager.driver;
+	}
+
+	public void ExtentReports() {
+		Extent_Report.initReport();
+	}
+
+	@AfterSuite
+	public void teardown() {
+		Driver_Manager.enddriver();
+	}
+}

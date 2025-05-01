@@ -1,0 +1,37 @@
+package Test_Runner;
+
+import org.testng.annotations.Test;
+
+import Base.Base_Class;
+import Pages.a_Login_Page;
+import Pages.b_Search_Job;
+import Pages.c_Save_Job;
+
+public class Linkedin_Test_Run extends Base_Class{
+
+	@Test(priority=1)
+	public void loginpage() {
+		a_Login_Page loginpage=new a_Login_Page(driver);
+		loginpage.SignWithYourEmail();
+		loginpage.EnterEmail("maadhavhira@gmail.com");
+		loginpage.EnterPassword("Delhi@1234");
+		loginpage.ClickOnContinue();
+		loginpage.manualPause();
+	}
+
+	@Test(priority=2,dependsOnMethods = "loginpage")
+	public void searchjob() throws InterruptedException {
+		b_Search_Job searchjob=new b_Search_Job(driver);
+		searchjob.ClickOnJobs();
+		searchjob.ClickOnSearchIcon();
+		Thread.sleep(3000);
+		searchjob.SearchJob("Automation Tester");
+	}
+
+	@Test(priority=3,dependsOnMethods = "searchjob")
+	public void savejob() {
+		c_Save_Job savejob=new c_Save_Job(driver);
+		savejob.SelectJob();
+		savejob.SaveJob();
+	}
+}

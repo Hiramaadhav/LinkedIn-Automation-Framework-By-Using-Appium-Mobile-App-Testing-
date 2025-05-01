@@ -1,0 +1,74 @@
+package Pages;
+
+import java.time.Duration;
+import java.util.Scanner;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class a_Login_Page<MobileElement> {
+	WebDriver ldriver;
+	WebDriverWait wait;
+
+
+	public a_Login_Page(WebDriver rDriver) {
+		ldriver = rDriver;
+		PageFactory.initElements(rDriver, this);
+		wait = new WebDriverWait(ldriver, Duration.ofSeconds(20)); 
+	}
+	//android.widget.ImageView[@content-desc="Cancel"]
+	//android.widget.ImageView[@content-desc="Cancel"]
+	@FindBy(xpath="//android.widget.ImageView[@content-desc=\"Cancel\"]")
+	private WebElement beforecancel ;
+
+	@FindBy(xpath="//android.widget.Button[@resource-id=\"com.linkedin.android:id/growth_prereg_fragment_login_button\"]")
+	private WebElement signwithyouremail;
+
+	@FindBy(xpath="//android.widget.ImageView[@content-desc=\"Cancel\"]")
+	private WebElement aftercancel ;
+
+	@FindBy(xpath="//android.widget.LinearLayout[@content-desc=\"Email address or phone number input\"]")
+	private WebElement enteremail ;
+
+	@FindBy(xpath="//android.widget.LinearLayout[@content-desc=\"Password input\"]/android.widget.FrameLayout")
+	private WebElement enterpassword ;
+
+	@FindBy(xpath="//android.widget.Button[@resource-id=\"com.linkedin.android:id/growth_login_fragment_sign_in\"]")
+	private WebElement Continue;
+
+
+	public void SignWithYourEmail() {
+		wait.until(ExpectedConditions.elementToBeClickable(beforecancel)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(signwithyouremail)).click();
+	}
+
+	/*public void EnterEmail(String Email) {
+		wait.until(ExpectedConditions.elementToBeClickable(aftercancel)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(aftercancel)).click();
+		WebElement emailField = wait.until(ExpectedConditions.visibilityOf(enteremail));;
+		emailField.sendKeys(Email);
+	}*/
+
+	public void EnterPassword(String Password) {
+		wait.until(ExpectedConditions.elementToBeClickable(aftercancel)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(aftercancel)).click();
+		@SuppressWarnings("unchecked")
+		MobileElement passwordField = (MobileElement) wait.until(ExpectedConditions.visibilityOf(enterpassword));;
+		((WebElement) passwordField).sendKeys(Password);
+	}
+
+	public void ClickOnContinue() {
+		wait.until(ExpectedConditions.elementToBeClickable(Continue)).click();
+	}
+
+	public void manualPause() {
+		System.out.println("Captcha occurs---> Fill The Captcha --->Press ENTER to continue...");
+		Scanner sc = new Scanner(System.in);
+		sc.nextLine(); 
+	}
+}
